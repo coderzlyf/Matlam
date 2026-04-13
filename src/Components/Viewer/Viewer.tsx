@@ -1,8 +1,11 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Center } from "@react-three/drei";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { KTX2Loader } from "three/addons/loaders/KTX2Loader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 
 // ✅ Types
 type CameraResetProps = {
@@ -12,11 +15,31 @@ type CameraResetProps = {
 
 // 🔹 Model
 function Model() {
-  const { scene } = useGLTF("/office_building.glb");
+  const { gl } = useThree();
+  const [model, setModel] = useState<THREE.Group | null>(null);
+
+  useEffect(() => {
+    // 🔹 KTX2 Loader
+    const ktx2Loader = new KTX2Loader()
+      .setTranscoderPath("/basis/") // MUST match public folder
+      .detectSupport(gl);
+
+    // 🔹 GLTF Loader
+    const loader = new GLTFLoader();
+    loader.setKTX2Loader(ktx2Loader);
+    loader.setMeshoptDecoder(MeshoptDecoder);
+
+    // 🔹 Load Model (IMPORTANT: use compressed file)
+    loader.load("/office_building.glb", (gltf) => {
+      setModel(gltf.scene);
+    });
+  }, [gl]);
+
+  if (!model) return null;
 
   return (
     <Center>
-      <primitive object={scene} rotation={[0, Math.PI, 0]} scale={1} />
+      <primitive object={model} rotation={[0, Math.PI, 0]} scale={1} />
     </Center>
   );
 }
@@ -79,4 +102,4 @@ export default function Viewer() {
 }
 
 // 🔥 Preload
-useGLTF.preload("/office_building.glb");
+useGLTF.preload("/office_building.glb", true);

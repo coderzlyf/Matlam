@@ -1,46 +1,12 @@
-import { motion, type Variants } from "framer-motion";
-
-const container: Variants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 50 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
-
-const cardVariant: Variants = {
-  hidden: { opacity: 0, y: 60, scale: 0.95 },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
-
 const R_Cards = () => {
   return (
-    <motion.section
+    <section
       id="features"
-      variants={container}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-100px" }}
       className="py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-surface-container-low relative overflow-hidden"
     >
       <div className="max-w-[1440px] mx-auto">
         {/* 🔥 Header */}
-        <motion.div variants={fadeUp} className="text-center mb-20">
+        <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-black text-primary font-headline tracking-tighter mb-4">
             Precision Growth Engine
           </h2>
@@ -48,13 +14,10 @@ const R_Cards = () => {
             Propel your property project to the top of the market with
             integrated high-performance marketing and analytics.
           </p>
-        </motion.div>
+        </div>
 
         {/* 🔥 Grid */}
-        <motion.div
-          variants={container}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             {
               icon: "search_insights",
@@ -77,13 +40,8 @@ const R_Cards = () => {
               desc: "A powerful management interface to update pricing, descriptions, and unit status in milliseconds.",
             },
           ].map((item, i) => (
-            <motion.div
+            <div
               key={i}
-              variants={cardVariant}
-              whileHover={{
-                y: -8,
-                scale: 1.03,
-              }}
               className="group bg-surface-container-lowest p-8 rounded-2xl flex flex-col h-full border-b-4 border-transparent hover:border-secondary transition-all relative overflow-hidden"
             >
               {/* 🔥 subtle hover glow */}
@@ -100,15 +58,15 @@ const R_Cards = () => {
               <p className="text-sm text-on-surface-variant leading-relaxed relative z-10">
                 {item.desc}
               </p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* 🔥 Background Glow */}
       <div className="absolute -top-20 left-20 w-72 h-72 bg-secondary/10 blur-[120px] rounded-full"></div>
       <div className="absolute bottom-0 right-20 w-72 h-72 bg-primary/10 blur-[120px] rounded-full"></div>
-    </motion.section>
+    </section>
   );
 };
 
