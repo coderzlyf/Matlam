@@ -1,14 +1,16 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import {
-  useGLTF,
-  Center,
-  OrbitControls,
-  OrbitControls as OrbitControlsImpl,
-} from "@react-three/drei";
+import { useGLTF, Center, OrbitControls } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
-// 🔹 Model (NO rotation reset here)
+// ✅ Types
+type CameraResetProps = {
+  isUserInteracting: React.RefObject<boolean>;
+  controlsRef: React.RefObject<OrbitControlsImpl | null>;
+};
+
+// 🔹 Model
 function VillaModel() {
   const { scene } = useGLTF("/cyberpunk_building.glb");
 
@@ -19,25 +21,19 @@ function VillaModel() {
   );
 }
 
-// 🔥 Smooth Reset Controller
-function CameraReset({ isUserInteracting, controlsRef }) {
+// 🔥 Camera Reset
+function CameraReset({ isUserInteracting, controlsRef }: CameraResetProps) {
   const { camera } = useThree();
 
-  // 🎯 original position + target
   const defaultPosition = new THREE.Vector3(0, 0, 500);
   const defaultTarget = new THREE.Vector3(0, 0, 0);
 
   useFrame(() => {
     if (!controlsRef.current) return;
 
-    // 👉 only reset when user NOT interacting
     if (!isUserInteracting.current) {
-      // smooth camera movement
       camera.position.lerp(defaultPosition, 0.05);
-
-      // smooth target movement
       controlsRef.current.target.lerp(defaultTarget, 0.05);
-
       controlsRef.current.update();
     }
   });
@@ -47,8 +43,8 @@ function CameraReset({ isUserInteracting, controlsRef }) {
 
 // 🔹 Viewer
 export default function VillaViewer() {
-  const isUserInteracting = useRef(false);
-  const controlsRef = useRef<any | null>(null);
+  const isUserInteracting = useRef<boolean>(false);
+  const controlsRef = useRef<OrbitControlsImpl | null>(null);
 
   return (
     <Canvas camera={{ position: [0, 0, 400], fov: 50 }}>
@@ -59,7 +55,6 @@ export default function VillaViewer() {
       <color attach="background" args={["#050505"]} />
       <VillaModel />
 
-      {/* 🔥 Smooth Reset Logic */}
       <CameraReset
         isUserInteracting={isUserInteracting}
         controlsRef={controlsRef}
@@ -81,3 +76,6 @@ export default function VillaViewer() {
     </Canvas>
   );
 }
+
+// 🔥 Preload
+useGLTF.preload("/cyberpunk_building.glb");

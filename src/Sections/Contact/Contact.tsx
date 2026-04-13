@@ -48,13 +48,13 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   // 🔹 Handle Input Change
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
   // 🔹 Handle Submit
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     setLoading(true);
 

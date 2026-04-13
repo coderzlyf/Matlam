@@ -2,24 +2,27 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Center } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
-// 🔹 Model (NO reset logic here)
+// ✅ Types
+type CameraResetProps = {
+  isUserInteracting: React.RefObject<boolean>;
+  controlsRef: React.RefObject<OrbitControlsImpl | null>;
+};
+
+// 🔹 Model
 function Model() {
   const { scene } = useGLTF("/office_building.glb");
 
   return (
     <Center>
-      <primitive
-        object={scene}
-        rotation={[0, Math.PI, 0]} // ✅ front-facing
-        scale={1}
-      />
+      <primitive object={scene} rotation={[0, Math.PI, 0]} scale={1} />
     </Center>
   );
 }
 
-// 🔥 Smooth Camera Reset Controller
-function CameraReset({ isUserInteracting, controlsRef }) {
+// 🔥 Camera Reset Controller
+function CameraReset({ isUserInteracting, controlsRef }: CameraResetProps) {
   const { camera } = useThree();
 
   const defaultPosition = new THREE.Vector3(0, 0, 200);
@@ -28,14 +31,9 @@ function CameraReset({ isUserInteracting, controlsRef }) {
   useFrame(() => {
     if (!controlsRef.current) return;
 
-    // 👉 Only reset when user stops interacting
     if (!isUserInteracting.current) {
-      // Smooth camera movement
       camera.position.lerp(defaultPosition, 0.05);
-
-      // Smooth target movement
       controlsRef.current.target.lerp(defaultTarget, 0.05);
-
       controlsRef.current.update();
     }
   });
@@ -45,15 +43,13 @@ function CameraReset({ isUserInteracting, controlsRef }) {
 
 // 🔹 Main Viewer
 export default function Viewer() {
-  const isUserInteracting = useRef(false);
-  const controlsRef = useRef<any | null>(null);
+  const isUserInteracting = useRef<boolean>(false);
+  const controlsRef = useRef<OrbitControlsImpl | null>(null);
 
   return (
     <Canvas camera={{ position: [0, 0, 10], fov: 50 }}>
-      {/* 🌑 Dark background */}
       <color attach="background" args={["#050505"]} />
 
-      {/* 💡 Lighting */}
       <ambientLight intensity={1} />
       <directionalLight position={[5, 5, 5]} intensity={1.5} />
       <directionalLight position={[-5, -5, -5]} intensity={0.5} />
@@ -82,5 +78,5 @@ export default function Viewer() {
   );
 }
 
-// 🔥 Preload model (important for performance)
+// 🔥 Preload
 useGLTF.preload("/office_building.glb");

@@ -37,7 +37,7 @@ const Navbar = () => {
     },
   };
 
-  const scrollToSection = (hash) => {
+  const scrollToSection = (hash: any) => {
     const el = document.querySelector(hash);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
@@ -46,9 +46,9 @@ const Navbar = () => {
 
   // ✅ FIX: match longest route first
   const currentRoute =
-    Object.keys(navConfig)
+    (Object.keys(navConfig) as Array<keyof typeof navConfig>)
       .sort((a, b) => b.length - a.length)
-      .find((route) => pathname.startsWith(route)) || "/";
+      .find((route) => pathname.startsWith(route)) ?? "/";
 
   const config = navConfig[currentRoute];
 

@@ -2,8 +2,23 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
-function Panorama({ texture }) {
+// ✅ Types
+type PanoramaProps = {
+  texture: THREE.Texture;
+};
+
+type ControlsProps = {
+  controlsRef: React.RefObject<OrbitControlsImpl | null>;
+};
+
+type PanoramaViewerProps = {
+  image: string;
+};
+
+// ✅ Panorama
+function Panorama({ texture }: PanoramaProps) {
   return (
     <mesh scale={[-1, 1, 1]}>
       <sphereGeometry args={[500, 60, 40]} />
@@ -12,8 +27,9 @@ function Panorama({ texture }) {
   );
 }
 
-function Controls({ controlsRef }) {
-  const { camera } = useThree();
+// ✅ Controls
+function Controls({ controlsRef }: ControlsProps) {
+  useThree(); // remove unused camera warning
 
   return (
     <OrbitControls
@@ -25,15 +41,14 @@ function Controls({ controlsRef }) {
   );
 }
 
-export default function PanoramaViewer({ image }) {
-  const controlsRef = useRef(null);
+// ✅ Main Component
+export default function PanoramaViewer({ image }: PanoramaViewerProps) {
+  const controlsRef = useRef<OrbitControlsImpl | null>(null);
 
   const texture = new THREE.TextureLoader().load(image);
 
   const handleReset = () => {
-    if (controlsRef.current) {
-      controlsRef.current.reset();
-    }
+    controlsRef.current?.reset(); // ✅ no TS error
   };
 
   return (
@@ -43,7 +58,6 @@ export default function PanoramaViewer({ image }) {
         <Controls controlsRef={controlsRef} />
       </Canvas>
 
-      {/* 🔄 Reset Button */}
       <button
         onClick={handleReset}
         className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-md text-xs backdrop-blur"
