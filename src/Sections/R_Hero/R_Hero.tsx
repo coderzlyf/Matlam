@@ -1,4 +1,5 @@
 import MatlamThreeD from "../../Components/MatlamThreeD/MatlamThreeD";
+import { trackCTAClick } from "../../analytics";
 
 const R_Hero = () => {
   return (
@@ -29,6 +30,7 @@ const R_Hero = () => {
           <div className="flex justify-center lg:justify-start">
             <button
               onClick={() => {
+                trackCTAClick();
                 const section = document.getElementById("contact");
                 section?.scrollIntoView({ behavior: "smooth" });
               }}

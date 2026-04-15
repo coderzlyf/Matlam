@@ -1,6 +1,7 @@
 import { useState } from "react";
 import emailjs from "emailjs-com";
 import { motion, type Variants } from "framer-motion";
+import { trackLead } from "../../analytics";
 
 const container: Variants = {
   hidden: {},
@@ -74,6 +75,7 @@ const Contact = () => {
           alert("Message sent successfully 🚀");
           setForm({ name: "", email: "", message: "" });
           setLoading(false);
+          trackLead();
         },
         (error) => {
           console.error(error);

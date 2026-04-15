@@ -1,9 +1,13 @@
+import { track3DmodelOne } from "../../analytics";
 import EngineStatus from "../EngineStatus/EngineStatus";
 import VillaViewer from "../VillaViewer/VillaViewer";
 
 const MatlamThreeD = () => {
   return (
-    <div className="w-full h-[260px] sm:h-[320px] md:h-[420px] bg-inverse-surface rounded-xl shadow-2xl relative overflow-hidden border border-white/5 p-2 sm:p-3 md:p-4 flex items-center justify-center">
+    <div
+      onClick={track3DmodelOne}
+      className="w-full h-[260px] sm:h-[320px] md:h-[420px] bg-inverse-surface rounded-xl shadow-2xl relative overflow-hidden border border-white/5 p-2 sm:p-3 md:p-4 flex items-center justify-center"
+    >
       {/* Background grid */}
       <div
         className="absolute inset-0 opacity-10 sm:opacity-20"

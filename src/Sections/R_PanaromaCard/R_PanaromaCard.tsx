@@ -1,5 +1,6 @@
 import EngagementCard from "../../Components/EngagementCard/EngagementCard";
 import PanoramaViewer from "../../Components/PanoramaViewer/PanoramaViewer";
+import { trackPanaroma } from "../../analytics";
 
 const R_PanaromaCard = () => {
   return (
@@ -12,7 +13,10 @@ const R_PanaromaCard = () => {
         <div className="w-full md:w-1/2 order-2 md:order-1">
           <div className="relative">
             {/* 🌐 Panorama Container */}
-            <div className="h-[240px] sm:h-[300px] md:h-[400px] lg:h-[450px] bg-surface-container-highest rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl relative">
+            <div
+              onClick={trackPanaroma}
+              className="h-[240px] sm:h-[300px] md:h-[400px] lg:h-[450px] bg-surface-container-highest rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl relative"
+            >
               <PanoramaViewer image="/panaromaSample.jpg" />
 
               {/* 🔘 Center UI */}

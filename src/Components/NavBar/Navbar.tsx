@@ -1,5 +1,6 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { trackCTAClick } from "../../analytics";
 
 const Navbar = () => {
   const { pathname } = useLocation();
@@ -148,7 +149,10 @@ const Navbar = () => {
           )}
 
           <button
-            onClick={() => scrollToSection("#contact")}
+            onClick={() => {
+              trackCTAClick();
+              scrollToSection("#contact");
+            }}
             className="block bg-primary text-on-primary px-4 md:px-6 py-2 md:py-2.5 rounded-xl text-sm font-medium hover:opacity-80 active:scale-95 transition"
           >
             Get Started

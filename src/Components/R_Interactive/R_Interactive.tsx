@@ -1,8 +1,12 @@
+import { track3DmodelTwo } from "../../analytics";
 import Viewer from "../Viewer/Viewer";
 
 const R_Interactive = () => {
   return (
-    <div className="bg-inverse-surface rounded-xl sm:rounded-2xl overflow-hidden relative shadow-inner h-[260px] sm:h-[320px] md:h-[420px] lg:h-[480px] group">
+    <div
+      onClick={track3DmodelTwo}
+      className="bg-inverse-surface rounded-xl sm:rounded-2xl overflow-hidden relative shadow-inner h-[260px] sm:h-[320px] md:h-[420px] lg:h-[480px] group"
+    >
       {/* 3D MODEL */}
       <div className="absolute inset-0 opacity-90">
         <Viewer />

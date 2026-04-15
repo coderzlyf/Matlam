@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion, type Variants } from "framer-motion";
+import { trackCTAClickToRealesto } from "../../analytics";
 
 const container: Variants = {
   hidden: {},
@@ -232,6 +233,7 @@ const Product = () => {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
               to="/realesto"
+              onClick={trackCTAClickToRealesto}
               className="inline-flex justify-center items-center px-6 sm:px-10 py-3 sm:py-4 bg-white text-black rounded-xl font-bold relative overflow-hidden group"
             >
               Explore Platform

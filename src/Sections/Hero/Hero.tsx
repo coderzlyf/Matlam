@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import MatlamThreeD from "../../Components/MatlamThreeD/MatlamThreeD";
 import { motion, type Variants } from "framer-motion";
+import { trackCTAClickToRealesto } from "../../analytics";
 
 const container = {
   hidden: {},
@@ -70,6 +71,7 @@ const Hero = () => {
           >
             <Link
               to="/realesto"
+              onClick={trackCTAClickToRealesto}
               className="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white bg-black relative overflow-hidden before:absolute before:inset-0 before:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.3)_50%,transparent_75%)] before:bg-[length:250%_250%] before:bg-[position:200%_0] before:bg-no-repeat hover:before:bg-[position:-100%_0] hover:before:duration-[1200ms]"
             >
               View Realesto
