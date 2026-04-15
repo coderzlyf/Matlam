@@ -30,7 +30,7 @@ function Model() {
     loader.setMeshoptDecoder(MeshoptDecoder);
 
     // 🔹 Load Model (IMPORTANT: use compressed file)
-    loader.load("/office_building.glb", (gltf) => {
+    loader.load("/cyberpunk_micro-apartments.glb", (gltf) => {
       setModel(gltf.scene);
     });
   }, [gl]);
@@ -39,7 +39,7 @@ function Model() {
 
   return (
     <Center>
-      <primitive object={model} rotation={[0, Math.PI, 0]} scale={1} />
+      <primitive object={model} rotation={[0, 0, 0]} scale={1} />
     </Center>
   );
 }
@@ -48,7 +48,7 @@ function Model() {
 function CameraReset({ isUserInteracting, controlsRef }: CameraResetProps) {
   const { camera } = useThree();
 
-  const defaultPosition = new THREE.Vector3(0, 0, 200);
+  const defaultPosition = new THREE.Vector3(0, 0, 10);
   const defaultTarget = new THREE.Vector3(0, 0, 0);
 
   useFrame(() => {

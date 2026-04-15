@@ -38,7 +38,7 @@ const R_Interactive = () => {
             </p>
 
             <h4 className="font-bold text-primary text-xl mb-2">
-              Penthouse Loft
+              CyberHouse bed room
             </h4>
 
             <div className="space-y-1 mb-4">
