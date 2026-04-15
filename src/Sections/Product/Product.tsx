@@ -57,7 +57,7 @@ const Product = () => {
               <div className="absolute -inset-2 sm:-inset-4 border border-secondary/30 rounded-xl"></div>
 
               <img
-                src="/realestomvp.png"
+                src="/realestomvpnew.png"
                 alt="Realesto platform mockup"
                 className="rounded-lg shadow-2xl relative z-10 w-full object-cover aspect-video"
               />
