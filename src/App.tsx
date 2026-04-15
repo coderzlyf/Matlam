@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./Components/NavBar/Navbar";
 import MatLam from "./Pages/MatLam/MatLam";
@@ -9,7 +9,7 @@ import { usePageTracking } from "./usePageTracking";
 function App() {
   usePageTracking();
   return (
-    <BrowserRouter>
+    <>
       <ScrollToTop />
       <Navbar />
       <Routes>
@@ -17,7 +17,7 @@ function App() {
         <Route path="/realesto" element={<Realesto />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
