@@ -170,7 +170,7 @@ const Contact = () => {
               <motion.a
                 variants={fadeUp}
                 whileHover={{ x: 6 }}
-                href="mailto:raguld3v@gmail.com"
+                href="mailto:ragul@matlam.online"
                 className="flex items-center gap-3 sm:gap-4 group"
               >
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-secondary-container flex items-center justify-center group-hover:scale-110 transition">
@@ -183,7 +183,7 @@ const Contact = () => {
                     Email
                   </p>
                   <p className="font-bold text-sm sm:text-base break-all">
-                    raguld3v@gmail.com
+                    ragul@matlam.online
                   </p>
                 </div>
               </motion.a>
