@@ -16,10 +16,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
   // 🔥 Route-based config
   const navConfig = {
     "/": {
@@ -125,10 +121,9 @@ const Navbar = () => {
 
       {/* 🔥 Mobile Menu */}
       <div
-        className={`md:hidden transform transition-transform duration-300 ease-out ${
-          open ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+        className={`md:hidden transition-all duration-300 overflow-hidden ${
+          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
-        style={{ willChange: "transform" }}
       >
         <div className="px-6 pb-4 flex flex-col gap-4 bg-white/90 backdrop-blur-xl">
           {config.menu.map((item, index) => (
