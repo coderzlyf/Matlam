@@ -233,9 +233,7 @@ const Product = () => {
                   {tool.icon}
                 </span>
                 <h5 className="font-bold text-sm mb-1">{tool.title}</h5>
-                <p className="text-xs text-on-primary-container">
-                  Optimized for conversions and analytics.
-                </p>
+                <p className="text-xs text-on-primary-container">{tool.desc}</p>
               </motion.div>
             ))}
           </div>
