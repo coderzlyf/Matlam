@@ -1,7 +1,6 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { trackCTAClick } from "../../analytics";
-import React from "react";
 
 const Navbar = () => {
   const { pathname } = useLocation();
