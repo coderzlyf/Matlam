@@ -202,10 +202,26 @@ const Product = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
-              { icon: "query_stats", title: "GA4 Tracking" },
-              { icon: "ads_click", title: "Ads Optimized" },
-              { icon: "edit_note", title: "Custom CMS" },
-              { icon: "person_add", title: "Lead Capture" },
+              {
+                icon: "query_stats",
+                title: "GA4 Tracking",
+                desc: "Track user origin, behavior, and conversion funnels with native GA4 integration.",
+              },
+              {
+                icon: "ads_click",
+                title: "Ads Optimized",
+                desc: "Built-in support for Meta and Google Ads tracking pixels for high-ROAS campaigns.",
+              },
+              {
+                icon: "edit_note",
+                title: "Custom CMS",
+                desc: "Manage content, unit status, and floorplans without writing a single line of code.",
+              },
+              {
+                icon: "person_add",
+                title: "Lead Capture",
+                desc: "Integrated enquiry forms that route leads directly to your sales team's inbox.",
+              },
             ].map((tool, i) => (
               <motion.div
                 key={i}
